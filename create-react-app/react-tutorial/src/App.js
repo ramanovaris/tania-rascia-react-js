@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Table from './Table'
+import React, { Component } from 'react';
+import Table from './Table';
 
 class App extends Component {
-  render() {
-    const characters = [
+  state = {
+    characters: [
       {
         name: 'Charlie',
         job: 'Janitor',
@@ -21,14 +21,31 @@ class App extends Component {
         job: 'Bartender',
       },
     ]
+  };
+
+  removeCharacter = (index) => {
+    const { characters } = this.state
+
+    this.setState({
+      characters: characters.filter((characters, i) => {
+        return i !== index
+      })
+    })
+  }
+
+  render() {
+    const { characters } = this.state;
 
     return (
       <div
         className='container'>
-        <Table charactersData={characters} />
+        <Table
+          charactersData={characters}
+          removeCharacter={this.removeCharacter}
+        />
       </div>
     )
   }
 }
 
-export default App
+export default App;
